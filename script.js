@@ -13,7 +13,7 @@ function Book(title, author, pages, readFlag) {
 const myLibary = [];
 
 function addBookToLibrary(title, author, pages, readFlag) {
-  let book = new Book(title, author, pages, readFlag);
+  const book = new Book(title, author, pages, readFlag);
   myLibary.push(book);
 }
 
@@ -33,13 +33,13 @@ addBookToLibrary("MEIN KAMPF", "ADOLF HITLER", 250, false);
 
 function showBooks(myLibary) {
   myLibary.forEach((book) => {
-    let container = document.querySelector(".books-container");
-    let item = document.createElement("div");
+    const container = document.querySelector(".books-container");
+    const item = document.createElement("div");
 
-    let title = document.createElement("h2");
-    let author = document.createElement("h3");
-    let pages = document.createElement("p");
-    let readFlag = document.createElement("p");
+    const title = document.createElement("h2");
+    const author = document.createElement("h3");
+    const pages = document.createElement("p");
+    const readFlag = document.createElement("p");
 
     item.classList.add("book");
     title.classList.add("title");
@@ -49,7 +49,7 @@ function showBooks(myLibary) {
 
     title.textContent = book.title;
     author.textContent = book.author;
-    pages.textContent = book.pages;
+    pages.textContent = book.pages + " Pages";
     readFlag.textContent = book.readFlag ? "Read" : "Not Read";
 
     item.append(title);
@@ -61,3 +61,17 @@ function showBooks(myLibary) {
   });
 }
 showBooks(myLibary);
+
+//Adding addBook functionality
+
+const dialog = document.querySelector("dialog");
+const showFormBtn = document.querySelector("#addBook");
+const closeFormBtn = document.querySelector("#closeForm");
+
+showFormBtn.addEventListener("click", () => {
+  dialog.showModal();
+});
+
+closeFormBtn.addEventListener("click", () => {
+  dialog.close();
+});
