@@ -10,13 +10,45 @@
   <body>
     <header>
       <h1>Library App</h1>
-      <button id="addBook">Add book</button>
+      <button id="openForm">Add book</button>
     </header>
     <main>
       <div class="books-container"></div>
       <dialog>
-        <h1>Form will be added here.</h1>
-        <button id="closeForm">Close</button>
+        <button id="closeForm">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <title>close-box</title>
+            <path
+              d="M19,3H16.3H7.7H5A2,2 0 0,0 3,5V7.7V16.4V19A2,2 0 0,0 5,21H7.7H16.4H19A2,2 0 0,0 21,19V16.3V7.7V5A2,2 0 0,0 19,3M15.6,17L12,13.4L8.4,17L7,15.6L10.6,12L7,8.4L8.4,7L12,10.6L15.6,7L17,8.4L13.4,12L17,15.6L15.6,17Z"
+            />
+          </svg>
+        </button>
+        <form action="" method="dialog">
+          <h2>Book Details</h2>
+          <hr />
+          <div class="form-item">
+            <label for="title">Title: </label>
+            <input type="text" id="title" name="title" required />
+          </div>
+          <div class="form-item">
+            <label for="author">Author: </label>
+            <input type="text" id="author" name="author" required />
+          </div>
+          <div class="form-item">
+            <label for="pages">Pages: </label>
+            <input type="number" id="pages" name="pages" required />
+          </div>
+          <p>Have you read this book?</p>
+          <div class="form-item radio-container">
+            <label for="read" class="radio">Yes</label>
+            <input type="radio" name="readFlag" id="read" value="true" />
+            <label for="not-read" class="radio">No</label>
+            <input type="radio" name="readFlag" id="not-read" value="false" />
+          </div>
+          <div class="form-item btn-container">
+            <button id="addBook">Add Book</button>
+          </div>
+        </form>
       </dialog>
     </main>
     <footer>

@@ -186,7 +186,7 @@ main {
 }
 .books-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 350px));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 280px));
 
   grid-template-rows: auto;
   gap: 2rem;
@@ -203,7 +203,7 @@ main {
 
 .book {
   max-width: 300px;
-  min-height: 300px;
+  min-height: 250px;
   border: 8px double #50483b;
   border-left: 30px solid #50483b;
   border-top-right-radius: 10px;
@@ -225,6 +225,7 @@ main {
   font-size: 1rem;
   position: absolute;
   bottom: 2rem;
+  max-width: 12ch;
 }
 .book .pages {
   font-size: 0.8rem;
@@ -239,4 +240,78 @@ main {
   color: #dcc9a8;
   transition: 0.6s;
   scale: 105%;
+}
+dialog {
+  position: relative;
+  border-radius: 10px;
+  background: linear-gradient(#e5decf, #d9bda5);
+}
+
+dialog #closeForm {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+dialog #closeForm svg {
+  width: 30px;
+  height: auto;
+}
+dialog h2 {
+  font-size: 1.8rem;
+  padding: 1rem;
+  text-align: center;
+}
+dialog .form-item {
+  display: flex;
+  justify-content: start;
+  padding: 10px 20px;
+}
+dialog .form-item label {
+  text-align: right;
+  padding-right: 10px;
+  min-width: 8ch;
+  font-size: 1rem;
+  font-weight: bold;
+  padding-top: 5px;
+}
+.form-item.radio-container {
+  justify-content: center;
+}
+dialog p {
+  padding-top: 0.8rem;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+dialog .form-item label.radio {
+  min-width: auto;
+}
+dialog .form-item input {
+  min-height: 1.5rem;
+  font-size: 1rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+dialog .form-item input:focus {
+  border: 1px solid #32251d;
+}
+dialog .form-item #read {
+  margin-right: 20px;
+}
+.btn-container.form-item {
+  justify-content: center;
+}
+.btn-container.form-item button {
+  font-size: 1.2rem;
+  margin: 0 20px;
+  background-color: #4f3525;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
 }
