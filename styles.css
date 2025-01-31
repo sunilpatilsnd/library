@@ -234,13 +234,16 @@ main {
   bottom: 1rem;
   right: 1rem;
 }
+.book .readStatus {
+  font-size: 1.1rem;
+}
 .book:hover {
-  border: 8px double #dcc9a8;
+  /* border: 8px double #dcc9a8;
   border-left: 30px solid #dcc9a8;
   background: #50483b;
-  color: #dcc9a8;
+  color: #dcc9a8; */
   transition: 0.6s;
-  scale: 105%;
+  scale: 104%;
 }
 dialog {
   position: relative;
@@ -341,4 +344,39 @@ dialog .form-item #read {
 }
 .deleteBtn:hover::after {
   opacity: 1;
+}
+
+.toggleReadBtn {
+  background: none;
+  border: none;
+  position: relative;
+  padding-top: 5px;
+}
+.toggleReadBtn::after {
+  content: "⟳";
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #32251d;
+}
+.toggleReadBtn:hover {
+  scale: 125%;
+  transition: 0.7s;
+}
+.toggleReadBtn:hover::before {
+  content: "Change Read Status?";
+  color: #32251d;
+  position: absolute;
+  width: 7ch;
+  position: absolute;
+  top: 30px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+}
+.green {
+  color: green;
+}
+.red {
+  color: red;
 }

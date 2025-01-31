@@ -1,12 +1,16 @@
 function Book(title, author, pages, readFlag) {
-  this.title = title;
-  this.author = author;
+  this.title = title.toUpperCase();
+  this.author = author.toUpperCase();
   this.pages = pages;
   this.readFlag = readFlag;
   this.info = function () {
     return `${this.title} by ${this.author}, ${pages}, ${
       this.readFlag ? "Read" : "not Read"
     } `;
+  };
+  this.toggleRead = function () {
+    this.readFlag = !this.readFlag;
+    return this.readFlag;
   };
 } //constructor function
 
@@ -40,6 +44,7 @@ function showBooks(myLibary) {
   }
 
   myLibary.forEach((book, index) => {
+    //iterate through myLibrary Array and show the content in dom
     const container = document.querySelector(".books-container");
 
     const item = document.createElement("div");
@@ -48,8 +53,8 @@ function showBooks(myLibary) {
     const author = document.createElement("h3");
     const pages = document.createElement("p");
     const readFlag = document.createElement("p");
-
-    const deleteBook = document.createElement("button");
+    const deleteBook = document.createElement("button"); //delete button
+    const toggleRead = document.createElement("button"); //toggle Read Button
 
     item.classList.add("book");
     title.classList.add("title");
@@ -57,9 +62,17 @@ function showBooks(myLibary) {
     pages.classList.add("pages");
     readFlag.classList.add("readStatus");
 
-    deleteBook.dataset.bookid = index;
+    if (book.readFlag == true) {
+      readFlag.classList.add("green");
+    } else {
+      readFlag.classList.add("red");
+    }
+
+    deleteBook.dataset.bookid = index; //array index set as unique identifier
+    toggleRead.dataset.bookid = index;
 
     deleteBook.classList = "deleteBtn";
+    toggleRead.classList = "toggleReadBtn";
 
     title.textContent = book.title;
     author.textContent = book.author;
@@ -71,6 +84,7 @@ function showBooks(myLibary) {
     item.append(pages);
     item.append(readFlag);
     item.append(deleteBook);
+    item.append(toggleRead);
 
     container.append(item);
 
@@ -81,9 +95,15 @@ function showBooks(myLibary) {
       myLibary.splice(deleteID, 1);
       showBooks(myLibary);
     });
+    toggleRead.addEventListener("click", (e) => {
+      const toggleReadID = e.target.dataset.bookid;
+      myLibary[toggleReadID].toggleRead();
+      showBooks(myLibary);
+    });
   });
 }
-showBooks(myLibary);
+
+showBooks(myLibary); //show books on first load
 
 //Adding addBook functionality
 
@@ -113,11 +133,13 @@ addBookBtn.addEventListener("click", () => {
   if (
     title.textContent == "" ||
     author.textContent == "" ||
-    pages.textContent == 0 ||
+    pages.textContent == "" ||
     readFlag.textContent == ""
   ) {
     const book = new Book(title.value, author.value, pages.value, readBool);
     myLibary.unshift(book);
     showBooks(myLibary);
+    document.querySelector("form").reset(); //resets the form input fields
+    document.querySelector("dialog").close(); //closes the dialouge
   }
 });
