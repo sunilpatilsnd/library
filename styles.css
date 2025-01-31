@@ -183,6 +183,7 @@ footer a {
 }
 main {
   margin: 0 auto;
+  min-height: 100vh;
 }
 .books-container {
   display: grid;
@@ -224,13 +225,13 @@ main {
 .book .author {
   font-size: 1rem;
   position: absolute;
-  bottom: 2rem;
+  bottom: 1rem;
   max-width: 12ch;
 }
 .book .pages {
   font-size: 0.8rem;
   position: absolute;
-  bottom: 2rem;
+  bottom: 1rem;
   right: 1rem;
 }
 .book:hover {
@@ -314,4 +315,30 @@ dialog .form-item #read {
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 5px;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  background: none;
+  border: none;
+}
+.deleteBtn:hover::before {
+  content: "Delete this book?";
+  position: absolute;
+  bottom: -3.5rem;
+  right: 0.5rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 5px;
+}
+.deleteBtn::after {
+  content: "❌";
+  font-size: 1.5rem;
+  opacity: 0.4;
+}
+.deleteBtn:hover::after {
+  opacity: 1;
 }

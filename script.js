@@ -48,6 +48,7 @@ function showBooks(myLibary) {
     const author = document.createElement("h3");
     const pages = document.createElement("p");
     const readFlag = document.createElement("p");
+
     const deleteBook = document.createElement("button");
 
     item.classList.add("book");
@@ -58,12 +59,7 @@ function showBooks(myLibary) {
 
     deleteBook.dataset.bookid = index;
 
-    deleteBook.textContent = "delete";
-    deleteBook.addEventListener("click", (event) => {
-      const deleteID = event.dataset.bookid;
-      myLibary.splice(deleteID, 1);
-      showBooks(myLibary);
-    });
+    deleteBook.classList = "deleteBtn";
 
     title.textContent = book.title;
     author.textContent = book.author;
@@ -77,6 +73,14 @@ function showBooks(myLibary) {
     item.append(deleteBook);
 
     container.append(item);
+
+    //delete button added for each book
+    deleteBook.addEventListener("click", (e) => {
+      const deleteID = e.target.dataset.bookid;
+
+      myLibary.splice(deleteID, 1);
+      showBooks(myLibary);
+    });
   });
 }
 showBooks(myLibary);
@@ -106,7 +110,14 @@ addBookBtn.addEventListener("click", () => {
 
   const readBool = readFlag.value == "true" ? true : false;
 
-  const book = new Book(title.value, author.value, pages.value, readBool);
-  myLibary.unshift(book);
-  showBooks(myLibary);
+  if (
+    title.textContent == "" ||
+    author.textContent == "" ||
+    pages.textContent == 0 ||
+    readFlag.textContent == ""
+  ) {
+    const book = new Book(title.value, author.value, pages.value, readBool);
+    myLibary.unshift(book);
+    showBooks(myLibary);
+  }
 });
