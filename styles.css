@@ -392,3 +392,6 @@ dialog .form-item input:valid {
   text-align: center;
   line-height: 1.8rem;
 }
+dialog .form-item input[type="radio"] {
+  outline: none;
+}
