@@ -23,20 +23,26 @@
             />
           </svg>
         </button>
-        <form action="" method="dialog" id="addBookForm">
+        <form id="addBookForm">
           <h2>Book Details</h2>
           <hr />
           <div class="form-item">
             <label for="title">Title: </label>
-            <input type="text" id="title" name="title" required />
+            <input type="text" id="title" name="title" required minlength="1" />
           </div>
           <div class="form-item">
             <label for="author">Author: </label>
-            <input type="text" id="author" name="author" required />
+            <input
+              type="text"
+              id="author"
+              name="author"
+              required
+              minlength="1"
+            />
           </div>
           <div class="form-item">
             <label for="pages">Pages: </label>
-            <input type="number" id="pages" name="pages" required />
+            <input type="number" id="pages" name="pages" required min="1" />
           </div>
           <p>Have you read this book?</p>
           <div class="form-item radio-container">
@@ -45,14 +51,19 @@
               type="radio"
               name="readFlag"
               id="read"
-              value="true"
+              value="read"
               required
             />
             <label for="not-read" class="radio">No</label>
-            <input type="radio" name="readFlag" id="not-read" value="false" />
+            <input
+              type="radio"
+              name="readFlag"
+              id="not-read"
+              value="not-read"
+            />
           </div>
           <div class="form-item btn-container">
-            <button id="addBook">Add Book</button>
+            <button type="submit" id="addBook">Add Book</button>
           </div>
         </form>
       </dialog>

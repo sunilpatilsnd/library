@@ -380,3 +380,15 @@ dialog .form-item #read {
 .red {
   color: red;
 }
+dialog .form-item input:invalid {
+  border: 1px solid red;
+}
+dialog .form-item input:valid {
+  background-color: rgb(193, 253, 193);
+  outline: 1px solid green;
+}
+.books-container h1 {
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 1.8rem;
+}

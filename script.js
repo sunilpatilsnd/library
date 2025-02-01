@@ -18,22 +18,28 @@ const myLibary = [];
 
 function addBookToLibrary(title, author, pages, readFlag) {
   const book = new Book(title, author, pages, readFlag);
-  myLibary.push(book);
+  myLibary.unshift(book);
+  showBooks(myLibary);
 }
 
-//add books to myLibrary Array start
-addBookToLibrary("THE MONK WHO SOLD HIS FERRARI", "ROBIN SHARMA", 225, true);
-addBookToLibrary("PARADISE LOST", "MILTON, JOHN", 199, true);
-addBookToLibrary("THE BEST OF RUSKIN BOND", "RUSKIN BOND", 499, false);
-addBookToLibrary("THE DEFINITIVE KAHLIL GIBRAN", "KHALIL GIBRAN", 395, false);
-addBookToLibrary(
-  "WINGS OF FIRE  An Autobiography",
-  "ABDULKALAM A P J",
-  450,
-  false
-);
-addBookToLibrary("MEIN KAMPF", "ADOLF HITLER", 250, false);
-//add books to myLibrary Array end
+function deleteBook(e) {
+  const deleteID = e.target.dataset.bookid;
+  myLibary.splice(deleteID, 1);
+  showBooks(myLibary);
+}
+
+function toggleReadStatus(e) {
+  const toggleReadID = e.target.dataset.bookid;
+  myLibary[toggleReadID].toggleRead();
+  showBooks(myLibary);
+}
+
+function noBooks() {
+  const container = document.querySelector(".books-container");
+  const noBookTxt = document.createElement("h1");
+  noBookTxt.textContent = `There are no books to display here`;
+  container.append(noBookTxt);
+}
 
 function showBooks(myLibary) {
   const container = document.querySelector(".books-container");
@@ -41,6 +47,11 @@ function showBooks(myLibary) {
   while (container.firstChild) {
     // empties the book container when new book is added or removed
     container.removeChild(container.firstChild);
+  }
+
+  if (myLibary.length == 0) {
+    debugger;
+    noBooks();
   }
 
   myLibary.forEach((book, index) => {
@@ -53,7 +64,7 @@ function showBooks(myLibary) {
     const author = document.createElement("h3");
     const pages = document.createElement("p");
     const readFlag = document.createElement("p");
-    const deleteBook = document.createElement("button"); //delete button
+    const deleteBookBtn = document.createElement("button"); //delete button
     const toggleRead = document.createElement("button"); //toggle Read Button
 
     item.classList.add("book");
@@ -68,10 +79,10 @@ function showBooks(myLibary) {
       readFlag.classList.add("red");
     }
 
-    deleteBook.dataset.bookid = index; //array index set as unique identifier
+    deleteBookBtn.dataset.bookid = index; //array index set as unique identifier
     toggleRead.dataset.bookid = index;
 
-    deleteBook.classList = "deleteBtn";
+    deleteBookBtn.classList = "deleteBtn";
     toggleRead.classList = "toggleReadBtn";
 
     title.textContent = book.title;
@@ -83,22 +94,17 @@ function showBooks(myLibary) {
     item.append(author);
     item.append(pages);
     item.append(readFlag);
-    item.append(deleteBook);
+    item.append(deleteBookBtn);
     item.append(toggleRead);
 
     container.append(item);
 
     //delete button added for each book
-    deleteBook.addEventListener("click", (e) => {
-      const deleteID = e.target.dataset.bookid;
-
-      myLibary.splice(deleteID, 1);
-      showBooks(myLibary);
+    deleteBookBtn.addEventListener("click", (e) => {
+      deleteBook(e);
     });
     toggleRead.addEventListener("click", (e) => {
-      const toggleReadID = e.target.dataset.bookid;
-      myLibary[toggleReadID].toggleRead();
-      showBooks(myLibary);
+      toggleReadStatus(e);
     });
   });
 }
@@ -119,27 +125,36 @@ closeFormBtn.addEventListener("click", () => {
   dialog.close();
 });
 
-// Adding Book details to add book array
-const addBookBtn = document.querySelector("#addBook");
+// Adding Book details to add book array from
+const addBookBtn = document.querySelector("#addBookForm");
+addBookBtn.addEventListener("submit", (e) => {
+  e.preventDefault();
+  processFormData();
+});
 
-addBookBtn.addEventListener("click", () => {
+function processFormData() {
   const title = document.querySelector("input[name='title']");
   const author = document.querySelector("input[name='author']");
   const pages = document.querySelector("input[name='pages']");
   const readFlag = document.querySelector("input[name='readFlag']:checked");
+  const readBool = readFlag.value == "read" ? true : false;
 
-  const readBool = readFlag.value == "true" ? true : false;
+  addBookToLibrary(title.value, author.value, pages.value, readBool);
 
-  if (
-    title.textContent == "" ||
-    author.textContent == "" ||
-    pages.textContent == "" ||
-    readFlag.textContent == ""
-  ) {
-    const book = new Book(title.value, author.value, pages.value, readBool);
-    myLibary.unshift(book);
-    showBooks(myLibary);
-    document.querySelector("form").reset(); //resets the form input fields
-    document.querySelector("dialog").close(); //closes the dialouge
-  }
-});
+  document.querySelector("form").reset(); //resets the form input fields
+  document.querySelector("dialog").close(); //closes the dialouge
+}
+
+//add books to myLibrary Array start
+addBookToLibrary("THE MONK WHO SOLD HIS FERRARI", "ROBIN SHARMA", 225, true);
+addBookToLibrary("PARADISE LOST", "MILTON, JOHN", 199, true);
+addBookToLibrary("THE BEST OF RUSKIN BOND", "RUSKIN BOND", 499, false);
+addBookToLibrary("THE DEFINITIVE KAHLIL GIBRAN", "KHALIL GIBRAN", 395, false);
+addBookToLibrary(
+  "WINGS OF FIRE  An Autobiography",
+  "ABDULKALAM A P J",
+  450,
+  false
+);
+addBookToLibrary("MEIN KAMPF", "ADOLF HITLER", 250, false);
+//add books to myLibrary Array end
